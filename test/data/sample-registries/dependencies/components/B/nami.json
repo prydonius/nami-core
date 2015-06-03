@@ -1,0 +1,8 @@
+{
+  "id": "B",
+  "name": "B-name",
+  "expects": ["A"],
+  "extends": ["Component"],
+  "revision": 1,
+  "version": "2.0.0"
+}

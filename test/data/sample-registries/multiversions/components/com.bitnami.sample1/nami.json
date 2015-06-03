@@ -1,0 +1,7 @@
+{
+  "id": "com.bitnami.sample1",
+  "name": "com.bitnami.sample1-name",
+  "extends": ["Component"],
+  "revision": 1,
+  "version": "1.1.0"
+}

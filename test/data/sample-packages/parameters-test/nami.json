@@ -1,0 +1,17 @@
+{
+  "id": "parameters-test",
+  "name": "parameters-test",
+  "extends": ["Component"],
+  "revision": 1,
+  "author": {"name": "Your Company", "url": "https://example.com"},
+  "version": "1.0.0",
+  "properties": {
+    "password": {"type": "password", "required": true},
+    "force": {"default": false, "type": "boolean"},
+    "start_services": {"default": true, "type": "boolean"}
+  },
+  "exports": {
+  },
+  "installation": {
+  }
+}

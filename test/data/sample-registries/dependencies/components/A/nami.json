@@ -1,0 +1,10 @@
+{
+  "id": "A",
+  "name": "A-name",
+  "extends": ["Component"],
+  "revision": 1,
+  "version": "1.0.0",
+  "exports": {
+    "test": {}
+  }
+}

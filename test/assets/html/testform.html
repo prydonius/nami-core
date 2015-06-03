@@ -1,0 +1,70 @@
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Test Form</title>
+</head>
+<body id="main_body" >
+  <div id="form_container">
+    <h1><a>Test</a></h1>
+    <p>
+      <a href="/hello">Hi</a>
+    </p>
+    <form id="form_1132769" method="post" action="/testform_submit">
+       <div class="form_description">
+        <h2>Test</h2>
+      </div>
+      <ul >        
+        <li id="li_1" >
+          <label class="description" for="name_field">Name </label>
+          <div>
+            <input id="name_field" name="name_field" type="text" maxlength="255" value=""/> 
+          </div> 
+        </li>
+        <li id="li_2" >
+          <label class="description" for="company_field">Company </label>
+          <div>
+            <input id="company_field" name="company_field" type="text" maxlength="255" value=""/> 
+          </div> 
+        </li>
+        <li id="li_3">Subscription type
+          <ul>
+            <li><input type="radio" name="subscription" id="free" value="free"><label for="free">Free</label></li>
+            <li><input type="radio" name="subscription" id="basic" value="basic"><label for="basic">Basic</label></li>
+            <li><input type="radio" name="subscription" id="pro" value="pro"><label for="pro">Pro</label></li>
+            <li><input type="radio" name="subscription" id="enterprise" value="enterprise"><label for="enterprise">Enterprise</label></li>
+          </ul>
+        </li>
+        <li>Hobbies:
+          <ul>
+            <li>
+              <label for="reading">Reading</label>
+              <input type="checkbox" name="reading" id="reading" value="reading">
+            </li>
+            <li>
+              <label for="games">Games</label>
+              <input type="checkbox" name="games" id="games" value="games" checked="checked">
+            </li>
+            <li>
+              <label for="sports">Sports</label>
+              <input type="checkbox" name="sports" id="sports" value="sports">
+            </li>
+          </ul>
+        </li>
+        <li>
+          <label for="location">Location</label>
+          <select name="location" id="location">
+            <option value="">Select location</option>
+            <option value="spain">Spain</option>
+            <option value="usa">USA</option>
+            <option value="japan">Japan</option>
+          </select>
+        </li>
+        <li class="buttons">
+          <input type="hidden" name="form_id" value="1132769" />
+          <input id="saveForm" class="button_text" type="submit" name="submit" value="Send" />
+        </li>
+      </ul>
+    </form>
+  </div>
+</body>
+</html>

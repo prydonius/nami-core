@@ -1,0 +1,23 @@
+{
+  "id": "com.bitnami.service",
+  "name": "dummy_service",
+  "extends": ["Service"],
+  "revision": 1,
+  "author": {"name": "Your Company", "url": "https://example.com"},
+  "version": "1.0.0",
+  "properties": {
+  },
+  "service": {
+    "pidFile": "{{$app.tmpDir}}/service.pid",
+    "logFile": "{{$app.logsDir}}/service.log",
+    "start": {
+      "timeout": 10,
+      "username": "root",
+      "command": "./ctlscript.sh start"
+    }
+  },
+  "exports": {
+  },
+  "installation": {
+  }
+}

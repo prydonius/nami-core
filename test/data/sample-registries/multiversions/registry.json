@@ -1,0 +1,40 @@
+{
+ "components": {
+   "foo": {
+     "installedAsRoot": false, "installdir": "/opt/bitnami/foo", "version": "1.1.0", "values": {}, "name": "foo-name", "id": "foo", "settings": {}, "extends": ["Component"], "lifecycle": "installed",
+     "definition": {
+       "root": "foo", "resources": {"js": ["main.js"], "json": "nami.json"}
+     }
+   },
+   "bar": {
+     "installedAsRoot": false, "installdir": "/opt/bitnami/bar", "version": "2.1.0", "values": {}, "name": "foo", "id": "bar", "settings": {}, "extends": ["Component"], "lifecycle": "installed",
+     "definition": {
+       "root": "bar", "resources": {"js": ["main.js"], "json": "nami.json"}
+     }
+   },
+   "com.bitnami.sample1": {
+     "installedAsRoot": false, "installdir": "/opt/bitnami/bar", "version": "2.1.0", "values": {}, "name": "com.bitnami.sample1-name", "id": "com.bitnami.sample1", "settings": {}, "extends": ["Component"], "lifecycle": "installed",
+     "definition": {
+       "root": "com.bitnami.sample1", "resources": {"js": ["main.js"], "json": "nami.json"}
+     }
+   },
+   "com.bitnami.sample2": {
+     "installedAsRoot": false, "installdir": "/opt/bitnami/bar", "version": "2.1.0", "values": {}, "name": "com.bitnami.sample2-name", "id": "com.bitnami.sample2", "settings": {}, "extends": ["Component"], "lifecycle": "installed",
+     "definition": {
+       "root": "com.bitnami.sample2", "resources": {"js": ["main.js"], "json": "nami.json"}
+     }
+   },
+   "componentWithDuplicatedName1": {
+     "installedAsRoot": false, "installdir": "/opt/bitnami/other", "version": "4.3.0", "values": {}, "name": "duplicated_name", "id": "componentWithDuplicatedName1", "settings": {}, "extends": ["Component"], "lifecycle": "installed",
+     "definition": {
+       "root": "componentWithDuplicatedName1", "resources": {"js": ["main.js"], "json": "nami.json"}
+     }
+   },
+   "componentWithDuplicatedName2": {
+     "installedAsRoot": false, "installdir": "/opt/bitnami/other", "version": "1.4.6", "values": {}, "name": "duplicated_name", "id": "componentWithDuplicatedName2", "settings": {}, "extends": ["Component"], "lifecycle": "installed",
+     "definition": {
+       "root": "componentWithDuplicatedName2", "resources": {"js": ["main.js"], "json": "nami.json"}
+     }
+   }
+ }
+}

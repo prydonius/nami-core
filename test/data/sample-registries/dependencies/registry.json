@@ -1,0 +1,29 @@
+{
+ "components": {
+   "A": {
+     "installedAsRoot": false, "installdir": "/opt/bitnami/A", "version": "1.0.0", "values": {}, "id": "A", "name": "A-name", "settings": {}, "extends": ["Component"], "lifecycle": "installed",
+     "definition": {
+       "root": "A", "resources": {"js": ["main.js"], "json": "nami.json"}
+     }
+   },
+   "B": {
+     "installedAsRoot": false, "installdir": "/opt/bitnami/bar", "version": "2.0.0", "values": {}, "id": "B", "name": "B-name", "settings": {}, "extends": ["Component"], "lifecycle": "installed",
+     "definition": {
+       "root": "B", "resources": {"js": ["main.js"], "json": "nami.json"}
+     }
+   },
+   "C": {
+     "installedAsRoot": true, "installdir": "/opt/bitnami/bar", "version": "3.0.0", "values": {}, "id": "C", "name": "C-name", "settings": {}, "extends": ["Component"], "lifecycle": "installed",
+     "definition": {
+       "root": "C", "resources": {"js": ["main.js"], "json": "nami.json"}
+     }
+   },
+   "D": {
+     "installedAsRoot": true, "installdir": "/opt/bitnami/bar", "version": "4.0.0", "values": {}, "id": "D", "name": "D-name", "settings": {}, "extends": ["Component"], "lifecycle": "unpacked",
+     "definition": {
+       "root": "D", "resources": {"js": ["main.js"], "json": "nami.json"}
+     }
+   }
+
+ }
+}

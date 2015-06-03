@@ -1,0 +1,7 @@
+{
+  "id": "D",
+  "name": "D-name",
+  "extends": ["Component"],
+  "revision": 1,
+  "version": "4.0.0"
+}

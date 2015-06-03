@@ -1,0 +1,7 @@
+{
+  "id": "componentWithDuplicatedName2",
+  "name": "duplicated_name",
+  "extends": ["Component"],
+  "revision": 1,
+  "version": "1.4.6"
+}

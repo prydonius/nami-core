@@ -1,0 +1,7 @@
+{
+  "id": "C",
+  "name": "C-name",
+  "extends": ["Component"],
+  "revision": 1,
+  "version": "3.0.0"
+}
