@@ -2,6 +2,9 @@
   "name": "nami-core",
   "version": "0.0.1",
   "description": "Nami core files",
+  "repository": {
+    "type" : "git", "url" : "https://github.com/bitnami/nami-core.git"
+  },
   "scripts": {
     "test": "gulp test",
     "lint": "gulp lint",
