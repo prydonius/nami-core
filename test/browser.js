@@ -80,6 +80,14 @@ function check(done, f) {
   }
 }
 
+function measure(fn) {
+  const start = process.hrtime();
+  fn();
+  const diff = process.hrtime(start);
+  // time in milliseconds
+  return (diff[0] * 1e9 + diff[1]) / 1e6;
+}
+
 function formatCookie(name, value, days) {
   let expires = '';
   if (days) {
@@ -112,6 +120,17 @@ function eraseCookie(res, name) {
   setCookie(res, name, '', -1);
 }
 
+function getTimeoutFromUrlInSeconds(urlText) {
+  const query = url.parse(urlText).query;
+  const m = query.match(/^time=(\d+.*)/);
+  return m ? parseInt(m[1], 10) : null;
+}
+
+function getTimeoutFromUrl(urlText) {
+  const timeout = getTimeoutFromUrlInSeconds(urlText);
+  return timeout !== null ? timeout * 1000 : null;
+}
+
 describe('$Browser', function() {
   this.timeout(50000);
   let server = null;
@@ -140,10 +159,15 @@ describe('$Browser', function() {
       this.res.writeHead(200);
       this.res.end(assetContents('html/testform.html'));
     });
+    server.addRoute('get', '/server_sleep', function() {
+      const timeout = getTimeoutFromUrl(this.req.url) || 60000;
+      setTimeout(() => {
+        this.res.writeHead(200);
+        this.res.end('OK');
+      }, timeout);
+    });
     server.addRoute('get', '/sleep', function() {
-      const query = url.parse(this.req.url).query;
-      const m = query.match(/^time=(\d+.*)/);
-      const timeout = m ? parseInt(m[1], 10) * 1000 : 60000;
+      const timeout = getTimeoutFromUrl(this.req.url) || 60000;
       this.res.writeHead(200);
       this.res.end(
         `<html>
@@ -157,6 +181,28 @@ clearInterval(id);
 `
       );
     });
+    server.addRoute('get', '/xhr', function() {
+      const timeout = getTimeoutFromUrlInSeconds(this.req.url) || 60000;
+      this.res.writeHead(200);
+      this.res.end(
+        `
+<html>
+  <head></head>
+  <body>
+    <script>
+      var xhr = XMLHttpRequest();
+      xhr.ontimeout = function (e) {
+        throw new Error('Connection timedout!')
+      };
+      xhr.open('GET', '/server_sleep?time=${timeout}', true);
+      xhr.send();
+    </script>
+  </body>
+</html>
+`
+      );
+    });
+
     server.addRoute('get', '/cookies', function() {
       const query = url.parse(this.req.url).query;
       const cookiesSpec = decodeURI(query) || '';
@@ -361,14 +407,6 @@ clearInterval(id);
   });
   // Does not really work
   xdescribe('Waiting()', function() {
-    function measure(fn) {
-      const start = process.hrtime();
-      fn();
-      const diff = process.hrtime(start);
-      // time in milliseconds
-      return (diff[0] * 1e9 + diff[1]) / 1e6;
-    }
-
     it('Waits for events to finish for a certain time', function() {
       const time = measure(
         () => {
@@ -378,6 +416,44 @@ clearInterval(id);
       expect(time).to.be.above(5000).and.below(7000);
     });
   });
+
+  describe('#xmlHttpRequestTimeout', function() {
+    it('Defaults to 2m', function() {
+      expect(b.evaluate(`
+var xhr = XMLHttpRequest();
+xhr.timeout;
+
+`)).to.be.eql(120000);
+    });
+    it('Can be configured', function() {
+      const newValue = 10000;
+      b.xmlHttpRequestTimeout = newValue;
+      expect(b.evaluate(`
+var xhr = XMLHttpRequest();
+xhr.timeout;
+
+`)).to.be.eql(newValue);
+    });
+    it('Can be used to limit the time xhr events are waited for', function() {
+      b.xmlHttpRequestTimeout = 1000;
+      expect(
+        measure(
+          () => {
+            b.visit(abs('/xhr?time=10')).exec();
+          }
+        )
+      ).to.be.above(1000).and.below(1500);
+    });
+  });
+  describe('#evaluate()', function() {
+    it('Allows executing code in the context of the page', function() {
+      b.visit(
+        abs(`/cookies?set=${encodeURI(JSON.stringify({foo: 'bar'}))}`)
+      ).exec();
+      expect(b.evaluate(`document.cookie.split(';')[0]`)).to.be.eql('foo=bar');
+    });
+  });
+
   describe('#describeForm()', function() {
     it('Provides information to easily instrument forms', function() {
       b.visit(testFormUrl).exec();
