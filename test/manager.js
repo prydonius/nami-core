@@ -317,7 +317,7 @@ a + b;
           expect(component.lifecycle).to.be.eql('unpacked');
           expect(function() {
             manager.initializePackage(component.id);
-          }).to.throw('The following options are required: password');
+          }).to.throw('password cannot be empty');
           expect(function() {
             const initializationOpts = argsMode === 'raw' ? {args: [`--password=${password}`]} : {
               hashArgs: {password: password}
@@ -383,7 +383,7 @@ a + b;
           const password = 'foo';
           expect(function() {
             manager.install(pkgDir);
-          }).to.throw('The following options are required: password');
+          }).to.throw('password cannot be empty');
           const initializationOpts = argsMode === 'raw' ? {args: ['--password=foo']} : {hashArgs: {password: 'foo'}};
 
           expect(function() {
